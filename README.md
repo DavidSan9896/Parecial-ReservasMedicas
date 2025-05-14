@@ -1,21 +1,25 @@
---David Santiago Cubuillos Méndez
-Caso práctico: Una clínica en línea necesita gestionar reservas de citas médicas. Cada solicitud de cita debe pasar por 
+--David Santiago Cubuillos Méndez 
+
+el punto 4 por estudiante el ejercicio esta hasta abajo 
+
+# Caso práctico
+Una clínica en línea necesita gestionar reservas de citas médicas. Cada solicitud de cita debe pasar por 
 un proceso de confirmación asíncrono (mediante simulación de disponibilidad médica), y notificar al paciente cuando la
 cita es confirmada o rechazada. El sistema debe ser robusto ante fallos y permitir crecimiento horizontal.
 
-Se usaron las siguientes Tecnologías 
+# Se usaron las siguientes Tecnologías 
 Lenguaje/Framework: Python + FastAPI
 Mensajería: RabbitMQ
 Contenedores: Docker + Docker Compose
 Almacenamiento: SQLite (ligera) para persistencia de estado
 
-Criterios Arquitectónicos
+# Criterios Arquitectónicos
 Se usao una unica cola de trabajo booking_queue para las reservas 
 Esto nos  permite mantener la lógica centralizada, facilitando 
 el escalado horizontal de los workers y reduce la complejidad
 
 
-para ejecutar 
+# para ejecutar 
 use los comandos 
 
 git clone https://github.com/DavidSan9896/Parecial-ReservasMedicas.git
@@ -91,7 +95,7 @@ y despues veras lo siguiente
 
 Requisitos Técnicos Cumplidos 
 
-API REST
+# API REST
 POST /book
 Crea una nueva reserva médica con los datos del paciente y la franja horaria deseada.
 {
@@ -109,7 +113,7 @@ en posman
 
 curl http://localhost:8080/booking/BOOKING_ID
 
-RabbitMQ – Work Queues
+# RabbitMQ – Work Queues
 
 Las reservas se procesan mediante colas de trabajo., se implementa en esta oparte del  main.py y en
  En worker.py - Consumo de la cola
@@ -141,7 +145,28 @@ worker: Encargado del procesamiento de reservas.
 notifier: Suscriptor a notificaciones del exchange.
 rabbitmq: Servicio de mensajería.
 
+# Ejercicio por estudiante 
 
+Ejercicio 4: Chat en grupo (fanout) Un mensaje enviado a un canal debe replicarse a todos los miembros. Crea chat.fanout como exchange tipo fanout y colas user_A, user_B, user_C. Envía un mensaje de chat y asegúrate de que llegue a todos. 
+
+# Creaccion 
+![image](https://github.com/user-attachments/assets/e4529ee5-754c-4c57-ad65-2b9b6c10e1ef)
+
+se crean las colas 
+![image](https://github.com/user-attachments/assets/c5c0333b-5cfc-43e1-a115-2bedb536a648)
+
+ya estan asignadas al chat.fanout
+![image](https://github.com/user-attachments/assets/710842cd-c32e-4733-88c4-8701a9560abb)
+
+envio del mensaje 
+
+![image](https://github.com/user-attachments/assets/46ff7b20-0363-471f-bcff-27b5f77ac5af)
+![image](https://github.com/user-attachments/assets/8fcc5712-a487-4139-bac1-ac50569a2627)
+
+pueba de los mensajes como vemos si lo recibio 
+![image](https://github.com/user-attachments/assets/a10cd478-904e-4601-8e03-53445218ad2a)
+
+![image](https://github.com/user-attachments/assets/a486eea0-9534-4306-8dbd-8e2316500ad6)
 
 
 
