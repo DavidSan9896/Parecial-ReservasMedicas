@@ -34,6 +34,17 @@ except Exception as e:
     logger.error(f"Error conectando a Redis: {e}")
     raise
 
+@app.get("/booking/{booking_id}")
+async def get_booking(booking_id: str):
+    """Obtiene el estado de una reserva específica"""
+    try:
+        booking_data = redis_client.get(f"booking:{booking_id}")
+        if booking_data:
+            return json.loads(booking_data)
+        raise HTTPException(status_code=404, detail="Reserva no encontrada")
+    except Exception as e:
+        logger.error(f"Error obteniendo reserva {booking_id}: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 # Configuración de coneccion RabbitMQ
 def get_rabbitmq_channel():
